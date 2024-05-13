@@ -10,10 +10,10 @@ const HomeCardComponent: FC<{
   route?: string;
 }> = ({ title, description, children, route }) => {
   return (
-    <div className="max-w-[20em]">
+    <div className="w-[20em] md:w-auto md:max-w-[20em]">
       <Link
         href={route ?? "/#"}
-        className="flex items-center justify-center gap-3 rounded border border-zinc-600 bg-zinc-700 p-5 transition duration-200 hover:scale-105 hover:bg-sky-800 hover:border-sky-600"
+        className="flex items-center justify-center gap-3 rounded border border-zinc-600 bg-zinc-700 p-5 transition duration-200 hover:scale-105 hover:border-sky-600 hover:bg-sky-800"
       >
         {children}
         <div>
@@ -28,11 +28,11 @@ const HomeCardComponent: FC<{
 const homePage: NextPage = () => {
   return (
     <main className="h-20 min-h-[100vh] w-full bg-zinc-900 text-zinc-200">
-      <div className="bg-kscapitol h-[30vh] w-full bg-zinc-800 bg-cover bg-center p-10">
-        <h1 className="text-[4rem] font-medium text-sky-200">Home</h1>
+      <div className="bg-kscapitol h-[20vh] md:h-[35vh] lg:h-[50vh] w-full bg-zinc-800 bg-cover bg-center p-10">
+        <h1 className="text-[2.5rem]  md:text-[4rem] font-medium text-sky-200">Home</h1>
       </div>
 
-      <div className="flex w-full gap-3 p-10">
+      <div className="flex w-full flex-wrap gap-3 p-10">
         <HomeCardComponent
           title="Search Applicants"
           description="Need to start an exam? Start Here!"

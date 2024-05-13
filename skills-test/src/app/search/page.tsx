@@ -3,11 +3,33 @@
 import type { NextPage } from "next";
 import { PageHeaderComponent } from "../_components/page-header";
 import { api } from "~/trpc/react";
-import { useState } from "react";
+import { type FC, useState } from "react";
 import Image from "next/image";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import ClockLoader from "react-spinners/ClockLoader";
+import type { Applicant } from "@prisma/client";
+
+const ApplicantListItem: FC<{ x: Applicant }> = ({ x }) => {
+  return (
+    <div className="flex items-center gap-2 border-b border-zinc-700  p-2">
+      <Image
+        src={x.imageUrl}
+        alt={x.firstName + "'s profile picture"}
+        width={50}
+        height={50}
+        className="rounded"
+      />
+      <div>
+        <div className="flex gap-2 text-lg font-semibold">
+          <p>{x.firstName}</p>
+          <p>{x.lastName}</p>
+        </div>
+        <p className="font-zinc-300 text-sm">{x.driversLicense}</p>
+      </div>
+    </div>
+  );
+};
 
 const SearchPage: NextPage = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -30,7 +52,7 @@ const SearchPage: NextPage = () => {
           }}
           type="text"
           placeholder="Search for applicants by name or dl"
-          className="w-1/2 rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-sky-600 focus:ring-1"
+          className="md:w-1/2 w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-sky-600 focus:ring-1"
         />
       </div>
       <div ref={animParent} className="flex items-center justify-center">
@@ -44,27 +66,9 @@ const SearchPage: NextPage = () => {
           </div>
         )}
         {!isLoading && data && data.length > 0 && (
-          <div className="w-1/2 border-x border-t border-zinc-700">
+          <div className="md:w-1/2 w-full border-x border-t border-zinc-700">
             {data.map((x) => (
-              <div
-                key={x.id}
-                className="flex items-center gap-2 border-b border-zinc-700  p-2"
-              >
-                <Image
-                  src={x.imageUrl}
-                  alt={x.firstName + "'s profile picture"}
-                  width={50}
-                  height={50}
-                  className="rounded"
-                />
-                <div>
-                  <div className="flex gap-2 text-lg font-semibold">
-                    <p>{x.firstName}</p>
-                    <p>{x.lastName}</p>
-                  </div>
-                  <p className="font-zinc-300 text-sm">{x.driversLicense}</p>
-                </div>
-              </div>
+              <ApplicantListItem key={x.id} x={x} />
             ))}
           </div>
         )}
