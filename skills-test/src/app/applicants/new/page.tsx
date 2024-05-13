@@ -8,7 +8,7 @@ import { useState } from "react";
 import { PageHeaderComponent } from "~/app/_components/page-header";
 import { api } from "~/trpc/react";
 
-export const NewApplicant: NextPage = () => {
+const NewApplicant: NextPage = () => {
   const router = useRouter();
 
   const { mutate, isPending } = api.applicant.createNewApplicant.useMutation({
