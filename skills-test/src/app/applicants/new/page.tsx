@@ -33,7 +33,7 @@ const NewApplicant: NextPage = () => {
     <main className="min-h-[100vh] bg-zinc-900 text-white">
       <PageHeaderComponent title="Create New Applicant" />
       <div className="flex w-full flex-col items-center justify-center">
-        <div className="w-1/3 p-5">
+        <div className="w-full lg:w-1/3 p-5">
           <p className="font-medium">First Name</p>
           <input
             type="text"
@@ -42,7 +42,7 @@ const NewApplicant: NextPage = () => {
             className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
           />
         </div>
-        <div className="w-1/3 p-5">
+        <div className="w-full lg:w-1/3 p-5">
           <p className="font-medium">Last Name</p>
           <input
             type="text"
@@ -51,7 +51,7 @@ const NewApplicant: NextPage = () => {
             className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
           />
         </div>
-        <div className="w-1/3 p-5">
+        <div className="w-full lg:w-1/3 p-5">
           <p className="font-medium">Drivers License</p>
           <input
             type="text"
@@ -60,7 +60,7 @@ const NewApplicant: NextPage = () => {
             className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
           />
         </div>
-        <div className="w-1/3 p-5">
+        <div className="w-full lg:w-1/3 p-5">
           <button
             onClick={createNewApplicant}
             className="flex w-full items-center justify-center gap-2 rounded bg-gradient-to-r from-blue-600 to-purple-600 p-2"

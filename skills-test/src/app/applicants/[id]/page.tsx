@@ -80,7 +80,7 @@ const EditApplicant: NextPage = () => {
         ) : (
           <>
               {img && (
-                <div className="w-1/3 p-5">
+                <div className="w-full lg:w-1/3 p-5 ">
                   <p className="font-medium">Profile Image</p>
                   <Image
                     width={100}
@@ -91,7 +91,7 @@ const EditApplicant: NextPage = () => {
                   />
                 </div>
               )}
-            <div className="w-1/3 p-5 flex gap-2">
+            <div className="w-full lg:w-1/3 p-5 flex gap-2">
               <button
                 onClick={deleteTheApplicant}
                 className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600"
@@ -108,7 +108,7 @@ const EditApplicant: NextPage = () => {
               </button>
             </div>
 
-            <div className="w-1/3 p-5">
+            <div className="w-full lg:w-1/3 p-5">
               <p className="font-medium">First Name</p>
               <input
                 type="text"
@@ -117,7 +117,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-1/3 p-5">
+            <div className="w-full lg:w-1/3 p-5">
               <p className="font-medium">Last Name</p>
               <input
                 type="text"
@@ -126,7 +126,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-1/3 p-5">
+            <div className="w-full lg:w-1/3 p-5">
               <p className="font-medium">Drivers License</p>
               <input
                 type="text"
@@ -135,7 +135,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-1/3 p-5">
+            <div className="w-full lg:w-1/3 p-5">
               <button
                 onClick={updateApplicant}
                 className="flex w-full items-center justify-center gap-2 rounded bg-gradient-to-r from-blue-600 to-purple-600 p-2"
@@ -150,7 +150,7 @@ const EditApplicant: NextPage = () => {
                 )}
               </button>
             </div>
-            <div className="w-1/3 p-5">
+            <div className="w-full lg:w-1/3 p-5">
               <button
                 onClick={deleteTheApplicant}
                 className="flex w-full items-center justify-center gap-2 rounded bg-red-700 p-2 hover:bg-red-600"
