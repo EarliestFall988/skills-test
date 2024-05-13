@@ -1,8 +1,9 @@
 "use client";
 
-import { CheckIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { CheckIcon, ClockIcon, DocumentCheckIcon, TrashIcon } from "@heroicons/react/24/solid";
 import type { NextPage } from "next";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import ClockLoader from "react-spinners/ClockLoader";
@@ -13,7 +14,7 @@ export const NewApplicant: NextPage = () => {
   const router = useRouter();
   const params = useParams();
 
-  const id = params.id as string | null | undefined;
+  const id = (params.id as string | null | undefined) ?? "";
 
   const { mutate, isPending } = api.applicant.update.useMutation({
     onSuccess: () => {
@@ -33,6 +34,7 @@ export const NewApplicant: NextPage = () => {
   const [FName, setFName] = useState<string>("");
   const [LName, setLName] = useState<string>("");
   const [DL, setDL] = useState<string>("");
+  const [img, setImg] = useState<string>("");
 
   useEffect(() => {
     if (!id) return;
@@ -41,6 +43,7 @@ export const NewApplicant: NextPage = () => {
     setFName(data?.firstName ?? "");
     setLName(data?.lastName ?? "");
     setDL(data?.driversLicense ?? "");
+    setImg(data?.imageUrl ?? "");
   }, [FName, data, id]);
 
   const updateApplicant = () => {
@@ -67,7 +70,7 @@ export const NewApplicant: NextPage = () => {
       <PageHeaderComponent title={"Update " + FName + " " + LName} />
       <div className="flex w-full flex-col items-center justify-center">
         {isLoading ? (
-          <div className="min-h-[60vh] flex items-center justify-center">
+          <div className="flex min-h-[60vh] items-center justify-center">
             <ClockLoader
               color="#0284c7"
               size={100}
@@ -76,6 +79,35 @@ export const NewApplicant: NextPage = () => {
           </div>
         ) : (
           <>
+              {img && (
+                <div className="w-1/3 p-5">
+                  <p className="font-medium">Profile Image</p>
+                  <Image
+                    width={100}
+                    height={100}
+                    src={img}
+                    alt="profile pic"
+                    className="w-28 rounded"
+                  />
+                </div>
+              )}
+            <div className="w-1/3 p-5 flex gap-2">
+              <button
+                onClick={deleteTheApplicant}
+                className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600"
+              >
+                <p>Start Test</p>
+                <DocumentCheckIcon className="h-5 -translate-y-[1px] " />
+              </button>
+              <button
+                onClick={deleteTheApplicant}
+                className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600"
+              >
+                <p>Schedule Test</p>
+                <ClockIcon className="h-5 -translate-y-[1px] " />
+              </button>
+            </div>
+
             <div className="w-1/3 p-5">
               <p className="font-medium">First Name</p>
               <input

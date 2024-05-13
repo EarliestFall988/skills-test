@@ -16,7 +16,7 @@ const ApplicantListItem: FC<{ x: Applicant }> = ({ x }) => {
   return (
     <Link
       href={"/applicants/" + x.id + "/"}
-      className="flex items-center gap-2 border-b border-zinc-700  p-2"
+      className="flex items-center gap-2 border-b border-zinc-700 hover:bg-zinc-800 duration-200 transition  p-2"
     >
       <Image
         src={x.imageUrl}
