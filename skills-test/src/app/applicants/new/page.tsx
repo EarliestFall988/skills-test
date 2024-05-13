@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/navigation";
 
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { PageHeaderComponent } from "~/app/_components/page-header";
 import { api } from "~/trpc/react";
 
@@ -13,6 +14,7 @@ const NewApplicant: NextPage = () => {
 
   const { mutate, isPending } = api.applicant.createNewApplicant.useMutation({
     onSuccess: () => {
+      toast.success("Successfully saved applicant");
       router.back();
     },
   });

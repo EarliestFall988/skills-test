@@ -5,13 +5,13 @@ import type { NextPage } from "next";
 import { PageHeaderComponent } from "../_components/page-header";
 
 
-const ReportsPage: NextPage = () => {
+const SettingsPage: NextPage = () => {
 
   return (
     <main className="min-h-[100vh] bg-zinc-900 text-white">
-      <PageHeaderComponent title="Reports"/>
+      <PageHeaderComponent title="Settings"/>
     </main>
   );
 };
 
-export default ReportsPage;
+export default SettingsPage;

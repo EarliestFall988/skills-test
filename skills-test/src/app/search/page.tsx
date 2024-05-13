@@ -11,6 +11,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 import type { Applicant } from "@prisma/client";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import TooltipComponent from "../_components/tooltip";
 
 const ApplicantListItem: FC<{ x: Applicant }> = ({ x }) => {
   return (
@@ -59,12 +60,14 @@ const SearchPage: NextPage = () => {
           placeholder="Search for applicants by name or dl"
           className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700 md:w-1/2"
         />
+        <TooltipComponent context="Create new Applicant" side="bottom">
         <Link
           href="/applicants/new"
           className="rounded bg-zinc-700 p-1 transition duration-200 hover:bg-blue-700 "
         >
           <PlusIcon className="w-8" />
         </Link>
+        </TooltipComponent>
       </div>
       <div ref={animParent} className="flex items-center justify-center">
         {isLoading && (

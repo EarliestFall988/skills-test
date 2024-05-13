@@ -1,12 +1,18 @@
 "use client";
 
-import { CheckIcon, ClockIcon, DocumentCheckIcon, TrashIcon } from "@heroicons/react/24/solid";
+import {
+  CheckIcon,
+  ClockIcon,
+  DocumentCheckIcon,
+  TrashIcon,
+} from "@heroicons/react/24/solid";
 import type { NextPage } from "next";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
 import ClockLoader from "react-spinners/ClockLoader";
+import { toast } from "react-toastify";
 import { PageHeaderComponent } from "~/app/_components/page-header";
 import { api } from "~/trpc/react";
 
@@ -18,6 +24,7 @@ const EditApplicant: NextPage = () => {
 
   const { mutate, isPending } = api.applicant.update.useMutation({
     onSuccess: () => {
+      toast.success("Successfully saved applicant");
       router.back();
     },
   });
@@ -25,6 +32,7 @@ const EditApplicant: NextPage = () => {
   const { mutate: deleteApplicant, isPending: isDeleting } =
     api.applicant.delete.useMutation({
       onSuccess: () => {
+        toast.success("Successfully deleted applicant");
         router.back();
       },
     });
@@ -44,7 +52,7 @@ const EditApplicant: NextPage = () => {
     setLName(data?.lastName ?? "");
     setDL(data?.driversLicense ?? "");
     setImg(data?.imageUrl ?? "");
-  }, [FName, data, id]);
+  }, [ data, id]);
 
   const updateApplicant = () => {
     if (id === null || id === undefined) return;
@@ -70,45 +78,41 @@ const EditApplicant: NextPage = () => {
       <PageHeaderComponent title={"Update " + FName + " " + LName} />
       <div className="flex w-full flex-col items-center justify-center">
         {isLoading ? (
-          <div className="flex min-h-[60vh] items-center justify-center">
+          <div className="flex flex-col gap-2 min-h-[60vh] items-center justify-center">
             <ClockLoader
               color="#0284c7"
               size={100}
               aria-label="Loading Spinner"
             />
+
+            <p className="text-zinc-500 animate-pulse">Loading Applicant</p>
           </div>
         ) : (
           <>
-              {img && (
-                <div className="w-full lg:w-1/3 p-5 ">
-                  <p className="font-medium">Profile Image</p>
-                  <Image
-                    width={100}
-                    height={100}
-                    src={img}
-                    alt="profile pic"
-                    className="w-28 rounded"
-                  />
-                </div>
-              )}
-            <div className="w-full lg:w-1/3 p-5 flex gap-2">
-              <button
-                onClick={deleteTheApplicant}
-                className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600"
-              >
+            {img && (
+              <div className="w-full p-5 lg:w-1/3 ">
+                <p className="font-medium">Profile Image</p>
+                <Image
+                  width={100}
+                  height={100}
+                  src={img}
+                  alt="profile pic"
+                  className="w-28 rounded"
+                />
+              </div>
+            )}
+            <div className="flex w-full gap-2 p-5 lg:w-1/3">
+              <button className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600">
                 <p>Start Test</p>
                 <DocumentCheckIcon className="h-5 -translate-y-[1px] " />
               </button>
-              <button
-                onClick={deleteTheApplicant}
-                className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600"
-              >
+              <button className="flex w-full items-center justify-center gap-2 rounded bg-zinc-700 p-2 hover:bg-zinc-600">
                 <p>Schedule Test</p>
                 <ClockIcon className="h-5 -translate-y-[1px] " />
               </button>
             </div>
 
-            <div className="w-full lg:w-1/3 p-5">
+            <div className="w-full p-5 lg:w-1/3">
               <p className="font-medium">First Name</p>
               <input
                 type="text"
@@ -117,7 +121,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-full lg:w-1/3 p-5">
+            <div className="w-full p-5 lg:w-1/3">
               <p className="font-medium">Last Name</p>
               <input
                 type="text"
@@ -126,7 +130,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-full lg:w-1/3 p-5">
+            <div className="w-full p-5 lg:w-1/3">
               <p className="font-medium">Drivers License</p>
               <input
                 type="text"
@@ -135,7 +139,7 @@ const EditApplicant: NextPage = () => {
                 className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700"
               />
             </div>
-            <div className="w-full lg:w-1/3 p-5">
+            <div className="w-full p-5 lg:w-1/3">
               <button
                 onClick={updateApplicant}
                 className="flex w-full items-center justify-center gap-2 rounded bg-gradient-to-r from-blue-600 to-purple-600 p-2"
@@ -150,7 +154,7 @@ const EditApplicant: NextPage = () => {
                 )}
               </button>
             </div>
-            <div className="w-full lg:w-1/3 p-5">
+            <div className="w-full p-5 lg:w-1/3">
               <button
                 onClick={deleteTheApplicant}
                 className="flex w-full items-center justify-center gap-2 rounded bg-red-700 p-2 hover:bg-red-600"
