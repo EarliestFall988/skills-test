@@ -9,10 +9,15 @@ import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 import ClockLoader from "react-spinners/ClockLoader";
 import type { Applicant } from "@prisma/client";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const ApplicantListItem: FC<{ x: Applicant }> = ({ x }) => {
   return (
-    <div className="flex items-center gap-2 border-b border-zinc-700  p-2">
+    <Link
+      href={"/applicants/" + x.id + "/"}
+      className="flex items-center gap-2 border-b border-zinc-700  p-2"
+    >
       <Image
         src={x.imageUrl}
         alt={x.firstName + "'s profile picture"}
@@ -27,7 +32,7 @@ const ApplicantListItem: FC<{ x: Applicant }> = ({ x }) => {
         </div>
         <p className="font-zinc-300 text-sm">{x.driversLicense}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
@@ -44,7 +49,7 @@ const SearchPage: NextPage = () => {
     <main className="min-h-[100vh] bg-zinc-900 text-white">
       <PageHeaderComponent title="Search" />
 
-      <div className="flex h-[10vh] items-center justify-center p-2">
+      <div className="flex h-[10vh] items-center justify-center gap-2 p-2">
         <input
           value={searchTerm}
           onChange={(x) => {
@@ -52,8 +57,14 @@ const SearchPage: NextPage = () => {
           }}
           type="text"
           placeholder="Search for applicants by name or dl"
-          className="md:w-1/2 w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-sky-600 focus:ring-1"
+          className="w-full rounded bg-zinc-700 p-2 outline-none ring-1 ring-zinc-600 transition duration-200 hover:ring hover:ring-blue-600 focus:ring-blue-700 md:w-1/2"
         />
+        <Link
+          href="/applicants/new"
+          className="rounded bg-zinc-700 p-1 transition duration-200 hover:bg-blue-700 "
+        >
+          <PlusIcon className="w-8" />
+        </Link>
       </div>
       <div ref={animParent} className="flex items-center justify-center">
         {isLoading && (
@@ -66,7 +77,7 @@ const SearchPage: NextPage = () => {
           </div>
         )}
         {!isLoading && data && data.length > 0 && (
-          <div className="md:w-1/2 w-full border-x border-t border-zinc-700">
+          <div className="w-full border-x border-t border-zinc-700 md:w-1/2">
             {data.map((x) => (
               <ApplicantListItem key={x.id} x={x} />
             ))}
