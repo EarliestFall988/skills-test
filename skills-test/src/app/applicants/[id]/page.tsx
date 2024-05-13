@@ -10,7 +10,7 @@ import ClockLoader from "react-spinners/ClockLoader";
 import { PageHeaderComponent } from "~/app/_components/page-header";
 import { api } from "~/trpc/react";
 
-export const NewApplicant: NextPage = () => {
+export const EditApplicant: NextPage = () => {
   const router = useRouter();
   const params = useParams();
 
@@ -172,4 +172,4 @@ export const NewApplicant: NextPage = () => {
   );
 };
 
-export default NewApplicant;
+export default EditApplicant;
